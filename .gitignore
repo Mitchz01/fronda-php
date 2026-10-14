@@ -1,0 +1,7 @@
+.env
+.playwright-mcp/
+tarea.txt
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
