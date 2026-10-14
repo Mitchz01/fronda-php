@@ -29,6 +29,11 @@ final class Request
         $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
         $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 
+        // Si el .htaccess de la raíz reenvía a /public, las URLs se quedan sin "/public".
+        if (str_ends_with($basePath, '/public') && !str_starts_with($uri, $basePath)) {
+            $basePath = substr($basePath, 0, -strlen('/public'));
+        }
+
         if ($basePath !== '' && str_starts_with($uri, $basePath)) {
             $uri = substr($uri, strlen($basePath));
         }

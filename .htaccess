@@ -1,0 +1,8 @@
+# Para XAMPP: si la carpeta completa queda dentro de htdocs,
+# todo se sirve desde public/ y el resto (app, .env, config) queda oculto.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L]
+</IfModule>
