@@ -26,6 +26,8 @@ spl_autoload_register(static function (string $class): void {
     }
 });
 
+require BASE_PATH . '/app/helpers.php';
+
 Env::load(BASE_PATH . '/.env');
 
 $config = [
