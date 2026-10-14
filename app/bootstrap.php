@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Clientes\ClienteRepository;
+use App\Clientes\ClienteValidator;
+use App\Clientes\PdoClienteRepository;
+use App\Clientes\RegistrarCliente;
 use App\Core\Container;
 use App\Core\Database;
 use App\Core\Env;
@@ -38,5 +42,11 @@ $container->set('config', static fn () => $config);
 
 // La conexión se abre solo cuando algo la pide, así el sitio carga aunque MySQL esté apagado.
 $container->set(PDO::class, static fn () => Database::connect($config['database']));
+
+$container->set(ClienteRepository::class, static fn (Container $c) => new PdoClienteRepository($c->get(PDO::class)));
+$container->set(RegistrarCliente::class, static fn (Container $c) => new RegistrarCliente(
+    $c->get(ClienteRepository::class),
+    new ClienteValidator(),
+));
 
 return $container;
