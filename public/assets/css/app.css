@@ -954,10 +954,22 @@ a.list-row:hover {
 @media (max-width: 960px) {
     .contact {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* En móvil el formulario va justo después del título. */
+    .contact__aside {
+        display: contents;
     }
 
     .contact__panel {
         position: static;
+        order: 1;
+    }
+
+    .contact__photo,
+    .contact__aside .group {
+        order: 2;
     }
 }
 

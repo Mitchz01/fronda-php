@@ -11,7 +11,7 @@ use App\Core\Csrf;
 
 $fields = [
     ['name' => 'nombre', 'label' => 'Nombre del cliente', 'icon' => 'user', 'placeholder' => 'Nombre completo', 'autocomplete' => 'name', 'maxlength' => 120],
-    ['name' => 'domicilio', 'label' => 'Domicilio', 'icon' => 'home-09', 'placeholder' => 'Domicilio (calle, número y barrio)', 'autocomplete' => 'street-address', 'maxlength' => 200],
+    ['name' => 'domicilio', 'label' => 'Domicilio', 'icon' => 'home-09', 'placeholder' => 'Domicilio y barrio', 'autocomplete' => 'street-address', 'maxlength' => 200],
     ['name' => 'telefono', 'label' => 'Teléfono', 'icon' => 'smart-phone-01', 'placeholder' => 'Teléfono', 'type' => 'tel', 'autocomplete' => 'tel', 'maxlength' => 20],
     ['name' => 'correo', 'label' => 'Correo electrónico', 'icon' => 'mail-01', 'placeholder' => 'Correo electrónico', 'type' => 'email', 'autocomplete' => 'email', 'maxlength' => 150],
 ];
