@@ -30,7 +30,7 @@ final class View
     {
         $content = self::partial("pages/{$page}", $data);
 
-        return self::partial($layout, [...$data, 'content' => $content]);
+        return self::partial($layout, array_merge($data, ['content' => $content]));
     }
 
     /** @param array<string, mixed> $data */

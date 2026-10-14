@@ -9,13 +9,13 @@ use DateTimeImmutable;
 final class Cliente
 {
     public function __construct(
-        public readonly string $nombre,
-        public readonly string $domicilio,
-        public readonly string $telefono,
-        public readonly string $correo,
-        public readonly string $comentarios,
-        public readonly ?int $id = null,
-        public readonly ?DateTimeImmutable $creadoEn = null,
+        public string $nombre,
+        public string $domicilio,
+        public string $telefono,
+        public string $correo,
+        public string $comentarios,
+        public ?int $id = null,
+        public ?DateTimeImmutable $creadoEn = null,
     ) {
     }
 

@@ -17,7 +17,7 @@ final class PdoClienteRepository implements ClienteRepository
      *
      * @param Closure(): PDO $connect
      */
-    public function __construct(private readonly Closure $connect)
+    public function __construct(private Closure $connect)
     {
     }
 
@@ -48,7 +48,7 @@ final class PdoClienteRepository implements ClienteRepository
         $stmt->bindValue('limite', $limite, PDO::PARAM_INT);
         $stmt->execute();
 
-        return array_map(Cliente::desdeFila(...), $stmt->fetchAll());
+        return array_map([Cliente::class, 'desdeFila'], $stmt->fetchAll());
     }
 
     public function total(): int

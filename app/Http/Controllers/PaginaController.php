@@ -12,7 +12,7 @@ use App\Core\View;
 final class PaginaController
 {
     /** @param array<string, mixed> $site */
-    public function __construct(private readonly array $site)
+    public function __construct(private array $site)
     {
     }
 

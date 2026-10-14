@@ -8,6 +8,11 @@ use App\Core\Router;
 use App\Core\Session;
 use App\Core\View;
 
+if (PHP_VERSION_ID < 80000) {
+    http_response_code(500);
+    exit('Este sitio necesita PHP 8.0 o superior. Versión actual: ' . PHP_VERSION);
+}
+
 // Con el servidor embebido (php -S) los archivos estáticos se sirven tal cual.
 if (PHP_SAPI === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
     return false;

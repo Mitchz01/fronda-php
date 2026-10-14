@@ -13,13 +13,13 @@ final class Request
      * @param array<string, mixed> $server
      */
     public function __construct(
-        public readonly string $method,
-        public readonly string $path,
-        public readonly string $basePath,
-        private readonly array $query = [],
-        private readonly array $body = [],
-        private readonly array $headers = [],
-        private readonly array $server = [],
+        public string $method,
+        public string $path,
+        public string $basePath,
+        private array $query = [],
+        private array $body = [],
+        private array $headers = [],
+        private array $server = [],
     ) {
     }
 

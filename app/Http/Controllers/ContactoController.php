@@ -18,7 +18,7 @@ use PDOException;
  */
 final class ContactoController
 {
-    public function __construct(private readonly RegistrarCliente $registrar)
+    public function __construct(private RegistrarCliente $registrar)
     {
     }
 

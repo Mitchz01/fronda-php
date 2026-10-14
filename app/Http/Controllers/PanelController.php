@@ -18,8 +18,8 @@ final class PanelController
 {
     /** @param array{user: string, password: string} $credenciales */
     public function __construct(
-        private readonly ClienteRepository $clientes,
-        private readonly array $credenciales,
+        private ClienteRepository $clientes,
+        private array $credenciales,
     ) {
     }
 

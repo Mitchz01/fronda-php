@@ -13,7 +13,7 @@ final class Router
 
     private ?Closure $notFound = null;
 
-    public function __construct(private readonly Container $container)
+    public function __construct(private Container $container)
     {
     }
 

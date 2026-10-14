@@ -32,11 +32,10 @@ $fields = [
 
         <div class="group">
             <?php foreach ($fields as $field): ?>
-                <?= component('field', [
-                    ...$field,
+                <?= component('field', array_merge($field, [
                     'value' => $old[$field['name']] ?? '',
                     'error' => $errores[$field['name']] ?? null,
-                ]) ?>
+                ])) ?>
             <?php endforeach; ?>
         </div>
 

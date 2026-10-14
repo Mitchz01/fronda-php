@@ -11,8 +11,8 @@ namespace App\Clientes;
 final class RegistrarCliente
 {
     public function __construct(
-        private readonly ClienteRepository $clientes,
-        private readonly ClienteValidator $validator,
+        private ClienteRepository $clientes,
+        private ClienteValidator $validator,
     ) {
     }
 

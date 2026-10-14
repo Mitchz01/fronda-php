@@ -9,7 +9,7 @@ use RuntimeException;
 final class ValidationException extends RuntimeException
 {
     /** @param array<string, string> $errores */
-    public function __construct(public readonly array $errores)
+    public function __construct(public array $errores)
     {
         parent::__construct('Revisa los datos del formulario.');
     }

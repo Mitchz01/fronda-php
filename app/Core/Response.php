@@ -10,9 +10,9 @@ final class Response
      * @param array<string, string> $headers
      */
     public function __construct(
-        public readonly string $body = '',
-        public readonly int $status = 200,
-        public readonly array $headers = [],
+        public string $body = '',
+        public int $status = 200,
+        public array $headers = [],
     ) {
     }
 
@@ -37,7 +37,7 @@ final class Response
 
     public function withHeader(string $name, string $value): self
     {
-        return new self($this->body, $this->status, [...$this->headers, $name => $value]);
+        return new self($this->body, $this->status, array_merge($this->headers, [$name => $value]));
     }
 
     public function send(): void
