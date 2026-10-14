@@ -9,6 +9,8 @@ use App\Clientes\RegistrarCliente;
 use App\Core\Container;
 use App\Core\Database;
 use App\Core\Env;
+use App\Http\Api\ClientesController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PaginaController;
 
 define('BASE_PATH', dirname(__DIR__));
@@ -46,7 +48,9 @@ $container->set('config', static fn () => $config);
 // La conexión se abre solo cuando algo la pide, así el sitio carga aunque MySQL esté apagado.
 $container->set(PDO::class, static fn () => Database::connect($config['database']));
 
-$container->set(ClienteRepository::class, static fn (Container $c) => new PdoClienteRepository($c->get(PDO::class)));
+$container->set(ClienteRepository::class, static fn (Container $c) => new PdoClienteRepository(
+    static fn () => $c->get(PDO::class),
+));
 $container->set(RegistrarCliente::class, static fn (Container $c) => new RegistrarCliente(
     $c->get(ClienteRepository::class),
     new ClienteValidator(),
@@ -54,5 +58,7 @@ $container->set(RegistrarCliente::class, static fn (Container $c) => new Registr
 
 $container->set('site', static fn () => require BASE_PATH . '/content/sitio.php');
 $container->set(PaginaController::class, static fn (Container $c) => new PaginaController($c->get('site')));
+$container->set(ContactoController::class, static fn (Container $c) => new ContactoController($c->get(RegistrarCliente::class)));
+$container->set(ClientesController::class, static fn (Container $c) => new ClientesController($c->get(RegistrarCliente::class)));
 
 return $container;

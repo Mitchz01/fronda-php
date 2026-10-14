@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace App\Clientes;
 
+use Closure;
 use PDO;
 
 final class PdoClienteRepository implements ClienteRepository
 {
-    public function __construct(private readonly PDO $pdo)
+    private ?PDO $pdo = null;
+
+    /**
+     * Recibe una función que abre la conexión, así solo se conecta
+     * a MySQL cuando de verdad se va a leer o escribir.
+     *
+     * @param Closure(): PDO $connect
+     */
+    public function __construct(private readonly Closure $connect)
     {
     }
 
@@ -17,7 +26,7 @@ final class PdoClienteRepository implements ClienteRepository
         $sql = 'INSERT INTO Clientes (nombre, domicilio, telefono, correo, comentarios)
                 VALUES (:nombre, :domicilio, :telefono, :correo, :comentarios)';
 
-        $this->pdo->prepare($sql)->execute([
+        $this->pdo()->prepare($sql)->execute([
             'nombre' => $cliente->nombre,
             'domicilio' => $cliente->domicilio,
             'telefono' => $cliente->telefono,
@@ -25,12 +34,12 @@ final class PdoClienteRepository implements ClienteRepository
             'comentarios' => $cliente->comentarios,
         ]);
 
-        return $cliente->conId((int) $this->pdo->lastInsertId());
+        return $cliente->conId((int) $this->pdo()->lastInsertId());
     }
 
     public function recientes(int $limite = 50): array
     {
-        $stmt = $this->pdo->prepare(
+        $stmt = $this->pdo()->prepare(
             'SELECT id, nombre, domicilio, telefono, correo, comentarios, creado_en
                FROM Clientes
            ORDER BY creado_en DESC, id DESC
@@ -44,6 +53,11 @@ final class PdoClienteRepository implements ClienteRepository
 
     public function total(): int
     {
-        return (int) $this->pdo->query('SELECT COUNT(*) FROM Clientes')->fetchColumn();
+        return (int) $this->pdo()->query('SELECT COUNT(*) FROM Clientes')->fetchColumn();
+    }
+
+    private function pdo(): PDO
+    {
+        return $this->pdo ??= ($this->connect)();
     }
 }
