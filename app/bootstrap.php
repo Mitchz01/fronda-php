@@ -12,6 +12,7 @@ use App\Core\Env;
 use App\Http\Api\ClientesController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PaginaController;
+use App\Http\Controllers\PanelController;
 
 define('BASE_PATH', dirname(__DIR__));
 
@@ -60,5 +61,9 @@ $container->set('site', static fn () => require BASE_PATH . '/content/sitio.php'
 $container->set(PaginaController::class, static fn (Container $c) => new PaginaController($c->get('site')));
 $container->set(ContactoController::class, static fn (Container $c) => new ContactoController($c->get(RegistrarCliente::class)));
 $container->set(ClientesController::class, static fn (Container $c) => new ClientesController($c->get(RegistrarCliente::class)));
+$container->set(PanelController::class, static fn (Container $c) => new PanelController(
+    $c->get(ClienteRepository::class),
+    $c->get('config')['app']['panel'],
+));
 
 return $container;
