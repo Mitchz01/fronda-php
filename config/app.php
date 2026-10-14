@@ -12,6 +12,6 @@ return [
 
     'panel' => [
         'user' => Env::get('PANEL_USER', 'admin'),
-        'password' => Env::get('PANEL_PASSWORD', ''),
+        'password' => Env::get('PANEL_PASSWORD', 'fronda'),
     ],
 ];
