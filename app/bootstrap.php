@@ -9,6 +9,7 @@ use App\Clientes\RegistrarCliente;
 use App\Core\Container;
 use App\Core\Database;
 use App\Core\Env;
+use App\Http\Controllers\PaginaController;
 
 define('BASE_PATH', dirname(__DIR__));
 
@@ -50,5 +51,8 @@ $container->set(RegistrarCliente::class, static fn (Container $c) => new Registr
     $c->get(ClienteRepository::class),
     new ClienteValidator(),
 ));
+
+$container->set('site', static fn () => require BASE_PATH . '/content/sitio.php');
+$container->set(PaginaController::class, static fn (Container $c) => new PaginaController($c->get('site')));
 
 return $container;

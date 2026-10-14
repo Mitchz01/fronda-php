@@ -4,6 +4,7 @@
  *
  * @var array{id: int, file: string, poster: string, label: string} $video
  * @var string|null $class
+ * @var string|null $preload
  */
 ?>
 <video
@@ -11,7 +12,7 @@
     muted
     loop
     playsinline
-    preload="none"
+    preload="<?= e($preload ?? 'none') ?>"
     poster="<?= e($video['poster']) ?>"
     aria-label="<?= e($video['label']) ?>"
     data-autoplay
