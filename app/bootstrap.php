@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Core\Container;
+use App\Core\Database;
 use App\Core\Env;
 
 define('BASE_PATH', dirname(__DIR__));
@@ -34,5 +35,8 @@ error_reporting(E_ALL);
 
 $container = new Container();
 $container->set('config', static fn () => $config);
+
+// La conexión se abre solo cuando algo la pide, así el sitio carga aunque MySQL esté apagado.
+$container->set(PDO::class, static fn () => Database::connect($config['database']));
 
 return $container;
